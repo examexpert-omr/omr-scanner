@@ -1,0 +1,97 @@
+{
+  "image_size": [
+    1247,
+    864
+  ],
+  "blocks": [
+    {
+      "subject": "Physics",
+      "questions": 15,
+      "options": 4,
+      "first_bubble": [
+        151.8,
+        443.9
+      ],
+      "last_bubble": [
+        239.1,
+        784.8
+      ]
+    },
+    {
+      "subject": "Chemistry",
+      "questions": 15,
+      "options": 4,
+      "first_bubble": [
+        340.2,
+        443.9
+      ],
+      "last_bubble": [
+        427.6,
+        781.4
+      ]
+    },
+    {
+      "subject": "Math",
+      "questions": 15,
+      "options": 4,
+      "first_bubble": [
+        525.2,
+        443.9
+      ],
+      "last_bubble": [
+        616.0,
+        779.6
+      ]
+    },
+    {
+      "subject": "Biology",
+      "questions": 15,
+      "options": 4,
+      "first_bubble": [
+        712.0,
+        440.5
+      ],
+      "last_bubble": [
+        804.5,
+        777.9
+      ]
+    },
+    {
+      "subject": "Bangla",
+      "questions": 15,
+      "options": 4,
+      "first_bubble": [
+        895.3,
+        440.5
+      ],
+      "last_bubble": [
+        992.9,
+        777.9
+      ]
+    },
+    {
+      "subject": "English",
+      "questions": 15,
+      "options": 4,
+      "first_bubble": [
+        1080.3,
+        438.7
+      ],
+      "last_bubble": [
+        1177.9,
+        776.2
+      ]
+    }
+  ],
+  "roll": {
+    "digits": 7,
+    "first_bubble": [
+      723.9,
+      123.5
+    ],
+    "last_bubble": [
+      917.5,
+      353.1
+    ]
+  }
+}
