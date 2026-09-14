@@ -1,0 +1,97 @@
+{
+  "image_size": [
+    1187,
+    779
+  ],
+  "blocks": [
+    {
+      "subject": "Bangla",
+      "questions": 15,
+      "options": 4,
+      "first_bubble": [
+        131.1,
+        437.2
+      ],
+      "last_bubble": [
+        182.0,
+        681.3
+      ]
+    },
+    {
+      "subject": "English",
+      "questions": 15,
+      "options": 4,
+      "first_bubble": [
+        280.9,
+        435.7
+      ],
+      "last_bubble": [
+        333.4,
+        678.2
+      ]
+    },
+    {
+      "subject": "Accounting",
+      "questions": 15,
+      "options": 4,
+      "first_bubble": [
+        430.7,
+        435.7
+      ],
+      "last_bubble": [
+        489.4,
+        679.7
+      ]
+    },
+    {
+      "subject": "Management",
+      "questions": 15,
+      "options": 4,
+      "first_bubble": [
+        582.1,
+        431.1
+      ],
+      "last_bubble": [
+        648.5,
+        678.2
+      ]
+    },
+    {
+      "subject": "Finance",
+      "questions": 15,
+      "options": 4,
+      "first_bubble": [
+        735.0,
+        432.6
+      ],
+      "last_bubble": [
+        801.4,
+        676.6
+      ]
+    },
+    {
+      "subject": "Marketing",
+      "questions": 15,
+      "options": 4,
+      "first_bubble": [
+        886.4,
+        432.6
+      ],
+      "last_bubble": [
+        954.3,
+        675.1
+      ]
+    }
+  ],
+  "roll": {
+    "digits": 7,
+    "first_bubble": [
+      663.9,
+      111.3
+    ],
+    "last_bubble": [
+      847.7,
+      309.0
+    ]
+  }
+}

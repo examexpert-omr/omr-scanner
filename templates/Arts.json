@@ -1,0 +1,58 @@
+{
+  "image_size": [
+    1378,
+    994
+  ],
+  "blocks": [
+    {
+      "subject": "Bangla",
+      "questions": 15,
+      "options": 4,
+      "first_bubble": [
+        217.3,
+        475.3
+      ],
+      "last_bubble": [
+        329.7,
+        855.6
+      ]
+    },
+    {
+      "subject": "English",
+      "questions": 15,
+      "options": 4,
+      "first_bubble": [
+        491.3,
+        469.4
+      ],
+      "last_bubble": [
+        605.6,
+        834.0
+      ]
+    },
+    {
+      "subject": "General Knowledge",
+      "questions": 30,
+      "options": 4,
+      "first_bubble": [
+        733.7,
+        463.4
+      ],
+      "last_bubble": [
+        1043.1,
+        796.5
+      ]
+    }
+  ],
+  "roll": {
+    "digits": 7,
+    "first_bubble": [
+      794.8,
+      158.0
+    ],
+    "last_bubble": [
+      1001.7,
+      372.8
+    ]
+  }
+}
