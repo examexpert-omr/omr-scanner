@@ -1,20 +1,72 @@
 {
   "image_size": [
-    1378,
-    994
+    1204,
+    838
   ],
   "blocks": [
+    {
+      "subject": "Physics",
+      "questions": 15,
+      "options": 4,
+      "first_bubble": [
+        131.6,
+        435.8
+      ],
+      "last_bubble": [
+        214.4,
+        755.1
+      ]
+    },
+    {
+      "subject": "Chemistry",
+      "questions": 15,
+      "options": 4,
+      "first_bubble": [
+        305.9,
+        435.8
+      ],
+      "last_bubble": [
+        388.8,
+        755.1
+      ]
+    },
+    {
+      "subject": "Math",
+      "questions": 15,
+      "options": 4,
+      "first_bubble": [
+        482.0,
+        437.5
+      ],
+      "last_bubble": [
+        563.1,
+        755.1
+      ]
+    },
+    {
+      "subject": "Biology",
+      "questions": 15,
+      "options": 4,
+      "first_bubble": [
+        654.6,
+        437.5
+      ],
+      "last_bubble": [
+        737.4,
+        755.1
+      ]
+    },
     {
       "subject": "Bangla",
       "questions": 15,
       "options": 4,
       "first_bubble": [
-        217.3,
-        475.3
+        828.9,
+        437.5
       ],
       "last_bubble": [
-        329.7,
-        855.6
+        911.8,
+        755.1
       ]
     },
     {
@@ -22,37 +74,24 @@
       "questions": 15,
       "options": 4,
       "first_bubble": [
-        491.3,
-        469.4
+        1005.0,
+        439.2
       ],
       "last_bubble": [
-        605.6,
-        834.0
-      ]
-    },
-    {
-      "subject": "General Knowledge",
-      "questions": 30,
-      "options": 4,
-      "first_bubble": [
-        733.7,
-        463.4
-      ],
-      "last_bubble": [
-        1043.1,
-        796.5
+        1086.1,
+        755.1
       ]
     }
   ],
   "roll": {
     "digits": 7,
     "first_bubble": [
-      794.8,
-      158.0
+      668.4,
+      138.9
     ],
     "last_bubble": [
-      1001.7,
-      372.8
+      851.4,
+      352.9
     ]
   }
 }
