@@ -18,51 +18,83 @@ system-ই (দামি hardware scanner-ও) মানুষের চেক �
 """
 
 import cv2
-import json
 import numpy as np
 
+def align_sheet(img):
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    blur = cv2.GaussianBlur(gray, (5, 5), 0)
+    
+    # Adaptive thresholding দিয়ে কালো চারকোনা এলাইনমেন্ট মার্কগুলো খুঁজে বের করা
+    thresh = cv2.adaptiveThreshold(
+        blur, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 11, 2
+    )
 
-# ---------- ১. পাতা খুঁজে বের করে perspective সোজা করা ----------
-def align_sheet(img, target_size=None):
-    """
-    শিটের বাইরের ৪ কোণা খুঁজে বের করে top-down (সোজা) ভিউতে
-    warp করে। ফোনে বাঁকা করে তোলা ছবিতেও bubble গ্রিড সবসময়
-    একই জায়গায় আসবে।
-    """
+    contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    
+    marker_centers = []
+    img_area = img.shape[0] * img.shape[1]
+
+    for c in contours:
+        area = cv2.contourArea(c)
+        # চারকোনা বর্ডার বক্সের সাইজ ফিল্টারিং (খুব ছোট বা বড় কন্টুর বাদ দেয়া)
+        if 0.0001 * img_area < area < 0.01 * img_area:
+            peri = cv2.arcLength(c, True)
+            approx = cv2.approxPolyDP(c, 0.04 * peri, True)
+            if len(approx) == 4:  # চারকোনা আকৃতি
+                M = cv2.moments(c)
+                if M["m00"] != 0:
+                    cx = int(M["m10"] / M["m00"])
+                    cy = int(M["m01"] / M["m00"])
+                    marker_centers.append([cx, cy])
+
+    # যদি ঠিক ৪টি অথবা তার বেশি এলাইনমেন্ট মার্ক পায়
+    if len(marker_centers) >= 4:
+        pts = np.array(marker_centers, dtype="float32")
+        rect = order_points(pts[:4])  # top-left, top-right, bottom-right, bottom-left
+        
+        (tl, tr, br, bl) = rect
+        widthA = np.linalg.norm(br - bl)
+        widthB = np.linalg.norm(tr - tl)
+        maxW = int(max(widthA, widthB))
+
+        heightA = np.linalg.norm(tr - br)
+        heightB = np.linalg.norm(tl - bl)
+        maxH = int(max(heightA, heightB))
+
+        dst = np.array([
+            [0, 0],
+            [maxW - 1, 0],
+            [maxW - 1, maxH - 1],
+            [0, maxH - 1]
+        ], dtype="float32")
+
+        M = cv2.getPerspectiveTransform(rect, dst)
+        warped = cv2.warpPerspective(img, M, (maxW, maxH))
+        return warped
+
+    # এলাইনমেন্ট মার্ক না পেলে আগের নিয়মে ব্যাকআপ এলাইনমেন্ট কাজ করবে[cite: 6]
+    return fallback_align(img)
+
+def fallback_align(img):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     blur = cv2.GaussianBlur(gray, (5, 5), 0)
     edges = cv2.Canny(blur, 50, 150)
-    edges = cv2.dilate(edges, np.ones((5, 5), np.uint8), iterations=2)
-
     contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     contours = sorted(contours, key=cv2.contourArea, reverse=True)
 
-    sheet_contour = None
     for c in contours[:5]:
         peri = cv2.arcLength(c, True)
         approx = cv2.approxPolyDP(c, 0.02 * peri, True)
         if len(approx) == 4 and cv2.contourArea(c) > 0.3 * img.shape[0] * img.shape[1]:
-            sheet_contour = approx.reshape(4, 2)
-            break
+            pts = order_points(approx.reshape(4, 2))[cite: 6]
+            (tl, tr, br, bl) = pts
+            maxW = int(max(np.linalg.norm(br - bl), np.linalg.norm(tr - tl)))
+            maxH = int(max(np.linalg.norm(tr - br), np.linalg.norm(tl - bl)))
+            dst = np.array([[0, 0], [maxW - 1, 0], [maxW - 1, maxH - 1], [0, maxH - 1]], dtype="float32")
+            M = cv2.getPerspectiveTransform(pts, dst)
+            return cv2.warpPerspective(img, M, (maxW, maxH))
 
-    if sheet_contour is None:
-        # পাতার বর্ডার স্পষ্ট না পেলে, ছবিটাকে যেমন আছে তেমনই ব্যবহার করা হবে
-        # (তখন ধরে নেওয়া হচ্ছে ছবি আগে থেকেই মোটামুটি সোজা/cropped)
-        return img
-
-    pts = order_points(sheet_contour)
-    (tl, tr, br, bl) = pts
-    widthA = np.linalg.norm(br - bl)
-    widthB = np.linalg.norm(tr - tl)
-    heightA = np.linalg.norm(tr - br)
-    heightB = np.linalg.norm(tl - bl)
-    maxW = int(max(widthA, widthB))
-    maxH = int(max(heightA, heightB))
-
-    dst = np.array([[0, 0], [maxW - 1, 0], [maxW - 1, maxH - 1], [0, maxH - 1]], dtype="float32")
-    M = cv2.getPerspectiveTransform(pts.astype("float32"), dst)
-    warped = cv2.warpPerspective(img, M, (maxW, maxH))
-    return warped
+    return img
 
 
 def order_points(pts):
