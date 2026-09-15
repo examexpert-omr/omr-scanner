@@ -9,11 +9,11 @@
       "questions": 15,
       "options": 4,
       "first_bubble": [
-        155.5,
-        419.2
+        157.3,
+        415.7
       ],
       "last_bubble": [
-        241.0,
+        242.7,
         733.0
       ]
     },
@@ -22,12 +22,12 @@
       "questions": 15,
       "options": 4,
       "first_bubble": [
-        383.4,
-        414.7
+        382.2,
+        414.0
       ],
       "last_bubble": [
-        469.2,
-        732.3
+        471.1,
+        731.2
       ]
     },
     {
@@ -35,20 +35,20 @@
       "questions": 30,
       "options": 4,
       "first_bubble": [
-        604.2,
-        414.7
+        601.8,
+        412.2
       ],
       "last_bubble": [
-        874.2,
-        732.3
+        873.8,
+        731.2
       ]
     }
   ],
   "roll": {
     "digits": 7,
     "first_bubble": [
-      680.3,
-      122.8
+      678.5,
+      121.1
     ],
     "last_bubble": [
       872.1,
